@@ -3,36 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine</title>
+<title>Valentine for Manal</title>
 <style>
   body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: url('https://i.ibb.co/3fB0rQz/owl-heart.jpg') no-repeat center center;
-    background-size: cover;
-    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background: #ffe6f0; /* خلفية فاتحة لطيفة */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    text-align: center;
   }
+
+  /* صورة البومة فوق النص */
+  .owl-img {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+
   h1 {
-    color: #fff;
-    font-size: 2rem;
-    text-shadow: 2px 2px 5px #000;
+    font-size: 2.5rem;
+    color: #ff3366;
+    text-shadow: 2px 2px 8px #ffccd5;
+    margin-bottom: 30px;
   }
+
   .btn {
-    padding: 10px 30px;
+    padding: 15px 40px;
     margin: 10px;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     border: none;
+    border-radius: 15px;
     cursor: pointer;
-    border-radius: 10px;
     color: white;
-    background-color: red;
+    background: linear-gradient(45deg, #ff4d6d, #ff1a4d);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
   }
+
+  .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+
   .hidden {
     display: none;
   }
@@ -40,12 +55,17 @@
 </head>
 <body>
 
-<h1>Manal, will you be my valentine?</h1>
-<button id="yes" class="btn">Yes</button>
-<button id="no" class="btn">No</button>
-<button id="areYouSure" class="btn hidden">Are you sure</button>
-<button id="reallySure" class="btn hidden">Are you really sure</button>
-<button id="reallyExtra" class="btn hidden">Really</button>
+<img src="https://i.ibb.co/3fB0rQz/owl-heart.jpg" alt="Owl with heart" class="owl-img">
+
+<h1>Manal, will you be my Valentine?</h1>
+
+<div id="buttons">
+  <button id="yes" class="btn">Yes</button>
+  <button id="no" class="btn">No</button>
+  <button id="areYouSure" class="btn hidden">Are you sure</button>
+  <button id="reallySure" class="btn hidden">Are you really sure</button>
+  <button id="reallyExtra" class="btn hidden">Really</button>
+</div>
 
 <script>
   const yesBtn = document.getElementById('yes');
@@ -54,12 +74,12 @@
   const reallySureBtn = document.getElementById('reallySure');
   const reallyExtraBtn = document.getElementById('reallyExtra');
 
-  // اضغط على Yes
+  // الضغط على Yes
   yesBtn.addEventListener('click', () => {
     alert('🐥🐥');
   });
 
-  // اضغط على No
+  // الضغط على No
   noBtn.addEventListener('click', () => {
     yesBtn.style.transform = 'scale(1.5)';
     noBtn.style.transform = 'scale(0.7)';
@@ -67,7 +87,7 @@
     areYouSureBtn.classList.remove('hidden');
   });
 
-  // اضغط على Are you sure
+  // الضغط على Are you sure
   areYouSureBtn.addEventListener('click', () => {
     yesBtn.style.transform = 'scale(2)';
     areYouSureBtn.style.transform = 'scale(0.6)';
@@ -75,14 +95,14 @@
     reallySureBtn.classList.remove('hidden');
   });
 
-  // اضغط على Are you really sure
+  // الضغط على Are you really sure
   reallySureBtn.addEventListener('click', () => {
     yesBtn.style.transform = 'scale(2.5)';
     reallySureBtn.style.transform = 'scale(0.5)';
     reallyExtraBtn.classList.remove('hidden');
   });
 
-  // اضغط على Really
+  // الضغط على Really
   reallyExtraBtn.addEventListener('click', () => {
     yesBtn.style.transform = 'scale(3)';
     reallyExtraBtn.style.transform = 'scale(0.5)';
