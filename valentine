@@ -15,7 +15,7 @@
     align-items: center;
     height: 100vh;
     text-align: center;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   .owl-img {
@@ -42,17 +42,8 @@
     100% { transform: scale(1); opacity: 1; }
   }
 
-  .buttons-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 90%;
-    max-width: 800px;
-    margin-bottom: 15px;
-  }
-
   .btn {
-    padding: 15px 40px;
+    padding: 15px 45px;
     margin: 10px;
     font-size: 1.6rem;
     border: none;
@@ -61,8 +52,7 @@
     color: white;
     box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     transition: all 0.3s ease;
-    flex: 1 1 150px; /* حجم افتراضي مرن */
-    max-width: 220px;
+    opacity: 1;
   }
 
   .btn:hover {
@@ -90,12 +80,10 @@
 
 <h1>Manal, will you be my Valentine?</h1>
 
-<div class="buttons-row">
+<div id="buttons">
   <button id="yes" class="btn btn-yes">Yes</button>
   <button id="no" class="btn btn-no">No</button>
-</div>
 
-<div class="buttons-row" id="no-options">
   <button class="btn btn-no hidden">Are you sure ?</button>
   <button class="btn btn-no hidden">Are you really sure</button>
   <button class="btn btn-no hidden">Are you really really sure</button>
@@ -110,48 +98,41 @@
 <script>
   const yesBtn = document.getElementById('yes');
   const noBtn = document.getElementById('no');
-  const noOptions = document.querySelectorAll('#no-options .btn-no');
+  const buttons = document.querySelectorAll('#buttons .btn-no');
 
-  let index = 0;
-  let yesScale = 1.3; // بداية تكبير Yes
-  const noShrinkFactor = 0.4; // مقدار تصغير كبير للخيار الأحمر
+  let index = 0; // المؤشر للزر الحالي من No options
+  let yesScale = 1.2; // مقياس تكبير زر Yes
 
   // عند الضغط على Yes
   yesBtn.addEventListener('click', () => {
-    yesScale += 0.3;
-    yesBtn.style.transform = `scale(${yesScale})`;
+    alert('🐥🐥');
   });
 
   // عند الضغط على No
   noBtn.addEventListener('click', () => {
-    noBtn.style.transition = 'all 0.3s ease';
-    noBtn.style.transform = `scale(${noShrinkFactor})`;
-    noBtn.style.opacity = '0.3';
-    yesScale += 0.5;
+    noBtn.classList.add('hidden');
+    buttons[index].classList.remove('hidden');
     yesBtn.style.transform = `scale(${yesScale})`;
-
-    setTimeout(() => {
-      noBtn.classList.add('hidden');
-      noOptions[index].classList.remove('hidden');
-    }, 300);
+    yesScale += 0.2;
   });
 
-  // بقية خيارات No
-  noOptions.forEach((btn) => {
+  // التعامل مع باقي الأزرار
+  buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
+      // تصغير الزر الحالي تدريجيًا قبل اختفائه
       btn.style.transition = 'all 0.3s ease';
-      btn.style.transform = `scale(${noShrinkFactor})`;
+      btn.style.transform = 'scale(0.5)';
       btn.style.opacity = '0.3';
-
-      yesScale += 0.5;
-      yesBtn.style.transform = `scale(${yesScale})`;
-
       setTimeout(() => {
         btn.classList.add('hidden');
+        // إظهار الزر التالي
         index++;
-        if(index < noOptions.length){
-          noOptions[index].classList.remove('hidden');
+        if(index < buttons.length){
+          buttons[index].classList.remove('hidden');
         }
+        // تكبير زر Yes تدريجيًا
+        yesBtn.style.transform = `scale(${yesScale})`;
+        yesScale += 0.2;
       }, 300);
     });
   });
