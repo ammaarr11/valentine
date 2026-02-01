@@ -38,9 +38,16 @@
     border-radius: 15px;  
     cursor: pointer;  
     color: white;  
-    background: linear-gradient(45deg, #ff4d6d, #ff1a4d);  
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);  
     transition: all 0.3s ease;  
+  }  
+  
+  .btn-yes {  
+    background: linear-gradient(45deg, #ff4d6d, #ff1a4d);  
+  }  
+  
+  .btn-no {  
+    background: linear-gradient(45deg, #33cc33, #009900);  
   }  
   
   .btn:hover {  
@@ -60,11 +67,11 @@
 <h1>Manal, will you be my Valentine?</h1>  
   
 <div id="buttons">  
-  <button id="yes" class="btn">Yes</button>  
-  <button id="no" class="btn">No</button>  
-  <button id="areYouSure" class="btn hidden">Are you sure</button>  
-  <button id="reallySure" class="btn hidden">Are you really sure</button>  
-  <button id="reallyExtra" class="btn hidden">Really</button>  
+  <button id="yes" class="btn btn-yes">Yes</button>  
+  <button id="no" class="btn btn-no">No</button>  
+  <button id="areYouSure" class="btn btn-no hidden">Are you sure</button>  
+  <button id="reallySure" class="btn btn-no hidden">Are you really sure</button>  
+  <button id="reallyExtra" class="btn btn-no hidden">Really</button>  
 </div>  
   
 <script>  
@@ -76,36 +83,35 @@
   
   // الضغط على Yes  
   yesBtn.addEventListener('click', () => {  
+    yesBtn.style.transform = 'scale(1.2)'; // يكبر تدريجيًا  
     alert('🐥🐥');  
   });  
   
   // الضغط على No  
   noBtn.addEventListener('click', () => {  
-    yesBtn.style.transform = 'scale(1.5)';  
-    noBtn.style.transform = 'scale(0.7)';  
-    noBtn.style.opacity = '0.5';  
+    noBtn.classList.add('hidden');  
     areYouSureBtn.classList.remove('hidden');  
+    yesBtn.style.transform = 'scale(1.5)';  
   });  
   
   // الضغط على Are you sure  
   areYouSureBtn.addEventListener('click', () => {  
-    yesBtn.style.transform = 'scale(2)';  
-    areYouSureBtn.style.transform = 'scale(0.6)';  
-    areYouSureBtn.innerText = 'Are you really sure';  
+    areYouSureBtn.classList.add('hidden');  
     reallySureBtn.classList.remove('hidden');  
+    yesBtn.style.transform = 'scale(2)';  
   });  
   
   // الضغط على Are you really sure  
   reallySureBtn.addEventListener('click', () => {  
-    yesBtn.style.transform = 'scale(2.5)';  
-    reallySureBtn.style.transform = 'scale(0.5)';  
+    reallySureBtn.classList.add('hidden');  
     reallyExtraBtn.classList.remove('hidden');  
+    yesBtn.style.transform = 'scale(2.5)';  
   });  
   
   // الضغط على Really  
   reallyExtraBtn.addEventListener('click', () => {  
+    reallyExtraBtn.classList.add('hidden');  
     yesBtn.style.transform = 'scale(3)';  
-    reallyExtraBtn.style.transform = 'scale(0.5)';  
   });  
 </script>  
   
