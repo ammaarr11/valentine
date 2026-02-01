@@ -8,7 +8,7 @@
   body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    background: #ffe6f0; /* خلفية فاتحة لطيفة */
+    background: #ffe6f0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,15 +17,14 @@
     text-align: center;
   }
 
-  /* صورة البومة فوق النص */
   .owl-img {
-    width: 150px;
+    width: 180px;
     margin-bottom: 20px;
   }
 
   h1 {
     font-size: 2.5rem;
-    color: #ff3366;
+    color: #d9004c;
     text-shadow: 2px 2px 8px #ffccd5;
     margin-bottom: 30px;
   }
@@ -42,17 +41,17 @@
     transition: all 0.3s ease;
   }
 
+  .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+
   .btn-yes {
     background: linear-gradient(45deg, #ff4d6d, #ff1a4d);
   }
 
   .btn-no {
     background: linear-gradient(45deg, #33cc33, #009900);
-  }
-
-  .btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
   }
 
   .hidden {
@@ -62,16 +61,16 @@
 </head>
 <body>
 
-<img src="https://i.ibb.co/3fB0rQz/owl-heart.jpg" alt="Owl with heart" class="owl-img">
+<img src="https://content.mycutegraphics.com/graphics/valentine/valentines-day-owl.png" class="owl-img" alt="Valentine Owl">
 
 <h1>Manal, will you be my Valentine?</h1>
 
 <div id="buttons">
   <button id="yes" class="btn btn-yes">Yes</button>
   <button id="no" class="btn btn-no">No</button>
-  <button id="areYouSure" class="btn btn-no hidden">Are you sure</button>
-  <button id="reallySure" class="btn btn-no hidden">Are you really sure</button>
-  <button id="reallyExtra" class="btn btn-no hidden">Really</button>
+  <button id="areYouSure" class="btn btn-no hidden">Are you sure?</button>
+  <button id="reallySure" class="btn btn-no hidden">Are you really sure?</button>
+  <button id="reallyExtra" class="btn btn-no hidden">Really?</button>
 </div>
 
 <script>
@@ -81,37 +80,37 @@
   const reallySureBtn = document.getElementById('reallySure');
   const reallyExtraBtn = document.getElementById('reallyExtra');
 
-  // الضغط على Yes
+  // عند الضغط على Yes
   yesBtn.addEventListener('click', () => {
-    yesBtn.style.transform = 'scale(1.2)'; // يكبر تدريجيًا
+    yesBtn.style.transform = 'scale(1.5)';
     alert('🐥🐥');
   });
 
-  // الضغط على No
+  // عند الضغط على No
   noBtn.addEventListener('click', () => {
-    noBtn.classList.add('hidden');
-    areYouSureBtn.classList.remove('hidden');
-    yesBtn.style.transform = 'scale(1.5)';
+    noBtn.classList.add('hidden');        // نخفي No
+    areYouSureBtn.classList.remove('hidden'); // نظهر Are you sure
+    yesBtn.style.transform = 'scale(1.3)';   // نكبر Yes شوي
   });
 
-  // الضغط على Are you sure
+  // عند الضغط على Are you sure?
   areYouSureBtn.addEventListener('click', () => {
     areYouSureBtn.classList.add('hidden');
     reallySureBtn.classList.remove('hidden');
-    yesBtn.style.transform = 'scale(2)';
+    yesBtn.style.transform = 'scale(1.6)';
   });
 
-  // الضغط على Are you really sure
+  // عند الضغط على Are you really sure?
   reallySureBtn.addEventListener('click', () => {
     reallySureBtn.classList.add('hidden');
     reallyExtraBtn.classList.remove('hidden');
-    yesBtn.style.transform = 'scale(2.5)';
+    yesBtn.style.transform = 'scale(1.9)';
   });
 
-  // الضغط على Really
+  // عند الضغط على Really?
   reallyExtraBtn.addEventListener('click', () => {
     reallyExtraBtn.classList.add('hidden');
-    yesBtn.style.transform = 'scale(3)';
+    yesBtn.style.transform = 'scale(2.2)';
   });
 </script>
 
