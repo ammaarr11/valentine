@@ -95,44 +95,58 @@
   <button class="btn btn-no hidden">Ok now this is hurting my feelings!</button>
 </div>
 
+<!-- الأصوات -->
+<audio id="yesSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+<audio id="noSound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
+
 <script>
   const yesBtn = document.getElementById('yes');
   const noBtn = document.getElementById('no');
   const buttons = document.querySelectorAll('#buttons .btn-no');
+  const yesSound = document.getElementById('yesSound');
+  const noSound = document.getElementById('noSound');
 
-  let index = 0; // المؤشر للزر الحالي من No options
-  let yesScale = 1.2; // مقياس تكبير زر Yes
+  let index = 0;
+  let yesScale = 1.3; // بداية تكبير Yes
+  const noShrinkFactor = 0.6; // مقدار تصغير كل خيار أحمر
 
   // عند الضغط على Yes
   yesBtn.addEventListener('click', () => {
-    alert('🐥🐥');
+    yesSound.play(); // تشغيل الصوت الرومانسي
+    yesBtn.style.transform = `scale(${yesScale + 0.3})`; // تكبير إضافي عند الضغط
   });
 
   // عند الضغط على No
   noBtn.addEventListener('click', () => {
-    noBtn.classList.add('hidden');
-    buttons[index].classList.remove('hidden');
+    noSound.play(); // صوت البوب
+    noBtn.style.transition = 'all 0.3s ease';
+    noBtn.style.transform = `scale(${noShrinkFactor})`; // تصغير أكبر
+    noBtn.style.opacity = '0.3';
     yesBtn.style.transform = `scale(${yesScale})`;
-    yesScale += 0.2;
+    yesScale += 0.5; // تكبير أكبر لزر Yes
+
+    setTimeout(() => {
+      noBtn.classList.add('hidden');
+      buttons[index].classList.remove('hidden');
+    }, 300);
   });
 
-  // التعامل مع باقي الأزرار
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      // تصغير الزر الحالي تدريجيًا قبل اختفائه
+      noSound.play(); // صوت البوب للخيارات الحمراء
       btn.style.transition = 'all 0.3s ease';
-      btn.style.transform = 'scale(0.5)';
+      btn.style.transform = `scale(${noShrinkFactor})`; // تصغير قوي
       btn.style.opacity = '0.3';
+
+      yesBtn.style.transform = `scale(${yesScale})`;
+      yesScale += 0.5; // تكبير Yes أكثر وأكثر
+
       setTimeout(() => {
         btn.classList.add('hidden');
-        // إظهار الزر التالي
         index++;
         if(index < buttons.length){
           buttons[index].classList.remove('hidden');
         }
-        // تكبير زر Yes تدريجيًا
-        yesBtn.style.transform = `scale(${yesScale})`;
-        yesScale += 0.2;
       }, 300);
     });
   });
