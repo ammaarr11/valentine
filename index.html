@@ -68,49 +68,51 @@
 <div id="buttons">
   <button id="yes" class="btn btn-yes">Yes</button>
   <button id="no" class="btn btn-no">No</button>
-  <button id="areYouSure" class="btn btn-no hidden">Are you sure?</button>
-  <button id="reallySure" class="btn btn-no hidden">Are you really sure?</button>
-  <button id="reallyExtra" class="btn btn-no hidden">Really?</button>
+  
+  <button class="btn btn-no hidden">Are you sure ?</button>
+  <button class="btn btn-no hidden">Are you really sure</button>
+  <button class="btn btn-no hidden">Are you really really sure</button>
+  <button class="btn btn-no hidden">Think again? 😕</button>
+  <button class="btn btn-no hidden">Don't believe in second chance ?</button>
+  <button class="btn btn-no hidden">Why are you being so cold 🥶</button>
+  <button class="btn btn-no hidden">Maybe we can talk about it ?</button>
+  <button class="btn btn-no hidden">I am not going to ask again !</button>
+  <button class="btn btn-no hidden">Ok now this is hurting my feelings!</button>
 </div>
 
 <script>
   const yesBtn = document.getElementById('yes');
   const noBtn = document.getElementById('no');
-  const areYouSureBtn = document.getElementById('areYouSure');
-  const reallySureBtn = document.getElementById('reallySure');
-  const reallyExtraBtn = document.getElementById('reallyExtra');
+  const buttons = document.querySelectorAll('#buttons .btn-no');
+
+  let index = 0; // المؤشر للزر الحالي من No options
 
   // عند الضغط على Yes
   yesBtn.addEventListener('click', () => {
-    yesBtn.style.transform = 'scale(1.5)';
+    yesBtn.style.transform = `scale(${parseFloat(getComputedStyle(yesBtn).transform.split(',')[0]) + 0.2 || 1.2})`;
     alert('🐥🐥');
   });
 
   // عند الضغط على No
   noBtn.addEventListener('click', () => {
-    noBtn.classList.add('hidden');        // نخفي No
-    areYouSureBtn.classList.remove('hidden'); // نظهر Are you sure
-    yesBtn.style.transform = 'scale(1.3)';   // نكبر Yes شوي
+    noBtn.classList.add('hidden'); // نخفي No الأصلي
+    buttons[index].classList.remove('hidden'); // نعرض أول زر من قائمة No options
+    yesBtn.style.transform = 'scale(1.3)';
   });
 
-  // عند الضغط على Are you sure?
-  areYouSureBtn.addEventListener('click', () => {
-    areYouSureBtn.classList.add('hidden');
-    reallySureBtn.classList.remove('hidden');
-    yesBtn.style.transform = 'scale(1.6)';
-  });
-
-  // عند الضغط على Are you really sure?
-  reallySureBtn.addEventListener('click', () => {
-    reallySureBtn.classList.add('hidden');
-    reallyExtraBtn.classList.remove('hidden');
-    yesBtn.style.transform = 'scale(1.9)';
-  });
-
-  // عند الضغط على Really?
-  reallyExtraBtn.addEventListener('click', () => {
-    reallyExtraBtn.classList.add('hidden');
-    yesBtn.style.transform = 'scale(2.2)';
+  // التعامل مع بقية الأزرار
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      btn.classList.add('hidden'); // نخفي الزر الحالي
+      index++;
+      if(index < buttons.length){
+        buttons[index].classList.remove('hidden'); // نعرض الزر التالي
+      }
+      // تكبير زر Yes تدريجيًا
+      let currentScale = yesBtn.style.transform.replace('scale(', '').replace(')', '');
+      currentScale = parseFloat(currentScale) || 1.3;
+      yesBtn.style.transform = `scale(${currentScale + 0.2})`;
+    });
   });
 </script>
 
